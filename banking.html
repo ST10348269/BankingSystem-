@@ -1,0 +1,52 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Mini Banking System Simulation</title>
+</head>
+<body>
+<h1>Mini Banking System (Simulation)</h1>
+
+<label>Name: <input id="name" type="text"></label><br><br>
+<label>Deposit: <input id="deposit" type="number"></label>
+<button onclick="deposit()">Deposit</button><br><br>
+<label>Withdraw: <input id="withdraw" type="number"></label>
+<button onclick="withdraw()">Withdraw</button><br><br>
+<button onclick="checkBalance()">Check Balance</button>
+<button onclick="showTransactions()">Transactions</button>
+
+<pre id="output"></pre>
+
+<script>
+let balance = 0;
+let transactions = [];
+
+function deposit() {
+  let amount = Number(document.getElementById("deposit").value);
+  balance += amount;
+  transactions.push(`Deposited: ${amount}`);
+  document.getElementById("output").textContent = `Deposited ${amount}`;
+}
+
+function withdraw() {
+  let amount = Number(document.getElementById("withdraw").value);
+  if(amount <= balance){
+    balance -= amount;
+    transactions.push(`Withdrew: ${amount}`);
+    document.getElementById("output").textContent = `Withdrew ${amount}`;
+  } else {
+    transactions.push(`Failed withdraw: ${amount}`);
+    document.getElementById("output").textContent = "Insufficient balance!";
+  }
+}
+
+function checkBalance() {
+  document.getElementById("output").textContent = `Balance: ${balance}`;
+}
+
+function showTransactions() {
+  document.getElementById("output").textContent = transactions.join("\n");
+}
+</script>
+</body>
+</html>
